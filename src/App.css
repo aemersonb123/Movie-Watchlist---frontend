@@ -26,3 +26,67 @@
 .nav-item-active {
   opacity: 1;
 }
+
+.movie-list {
+  margin-top: 3rem;
+}
+
+.movie-card-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 2rem;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  border-color: #f4ac45;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 20px;
+  overflow: hidden;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.movie-card--movie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-card--title {
+  color: #f4ac45;
+  text-align: center;
+  font-size: 1.3rem;
+  padding: 2rem;
+}
+
+.movie-card--poster {
+  width: 100%;
+}
+
+.movie-card--actions {
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.movie-card--action {
+  color: white;
+  cursor: pointer;
+  background-color: #f4ac45;
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.movie-card--delete {
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-left-color: white;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: white;
+}
