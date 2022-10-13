@@ -54,7 +54,7 @@ const movies = [
   },
 ];
 
-function Watchlist(userToken) {
+function Watchlist({ userToken }) {
   const handleMovieWatched = (_id) => {
     console.log('Watched movie: ' + _id);
   };
