@@ -90,3 +90,9 @@
   border-right-width: 2px;
   border-right-color: white;
 }
+
+.section-title {
+  font-size: 3rem;
+  margin-bottom: 4rem;
+  text-align: center;
+}

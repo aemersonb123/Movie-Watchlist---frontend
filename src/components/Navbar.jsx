@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 
 function Navbar({ loggedIn }) {
-  const [page, setPage] = useState('movies');
+  const [page, setPage] = useState('watchlist');
 
   const getStylesNavItem = (itemPage) => {
     return 'nav-item ' + (itemPage === page ? 'nav-item-active' : 'null');
