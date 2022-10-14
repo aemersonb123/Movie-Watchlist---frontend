@@ -35,7 +35,7 @@ function RegisterForm() {
           onChange={({ target }) => setUsername(target.value)}
         />
         <input
-          type='text'
+          type='password'
           placeholder='Password...'
           className='form-control'
           value={password}
@@ -43,7 +43,7 @@ function RegisterForm() {
         />
 
         <input
-          type='text'
+          type='password'
           placeholder='Confirm password...'
           className='form-control'
           value={confirmPassword}

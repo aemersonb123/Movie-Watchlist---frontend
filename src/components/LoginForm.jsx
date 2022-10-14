@@ -30,7 +30,7 @@ function LoginForm() {
           onChange={({ target }) => setUsername(target.value)}
         />
         <input
-          type='text'
+          type='password'
           placeholder='Password...'
           className='form-control'
           value={password}
