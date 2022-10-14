@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.navbar-brand:focus {
+  color: #f4ac45;
+}
+
 .nav-item {
   color: #f4ac45;
   font-size: 1.2rem;
@@ -114,4 +118,16 @@
 
 .alert-danger {
   font-size: 1.3rem;
+}
+
+.add-movie {
+  position: fixed;
+  padding: 1rem;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  background-color: #f4ac45;
+  color: white;
+  border: none;
+  right: 2rem;
+  bottom: 3rem;
 }

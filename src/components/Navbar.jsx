@@ -1,30 +1,47 @@
 import React from 'react';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-function Navbar({ loggedIn }) {
-  const [page, setPage] = useState('register');
+function Navbar({ onLogout }) {
+  const page = useLocation().pathname.slice(1);
 
   const getStylesNavItem = (itemPage) => {
-    return 'nav-item ' + (itemPage === page ? 'nav-item-active' : 'null');
+    return 'nav-item ' + (itemPage === page ? 'nav-item-active' : '');
+  };
+
+  const loggedIn = () => {
+    return localStorage.getItem('x-auth-token');
   };
 
   return (
     <div className='navbar navbar-expand-lg'>
       <div className='container-fluid'>
-        <a className='navbar-brand'>Movie Watchlist</a>
+        <Link to='/' className='navbar-brand'>
+          Movie Watchlist
+        </Link>
         <ul className='navbar-nav'>
-          <li className={getStylesNavItem('movies')}>Movies</li>
-          {loggedIn && (
+          <Link to='/' className={getStylesNavItem('')}>
+            Movies
+          </Link>
+          {loggedIn() && (
             <>
-              <li className={getStylesNavItem('watchlist')}>Watchlist</li>
-              <li className='nav-item'>Logout</li>
+              <Link to='/watchlist' className={getStylesNavItem('watchlist')}>
+                Watchlist
+              </Link>
+              <a onClick={onLogout} className='nav-item'>
+                Logout
+              </a>
             </>
           )}
 
-          {!loggedIn && (
+          {!loggedIn() && (
             <>
-              <li className={getStylesNavItem('login')}>Login</li>
-              <li className={getStylesNavItem('register')}>Register</li>
+              <Link to='/login' className={getStylesNavItem('login')}>
+                Login
+              </Link>
+              <Link to='/register' className={getStylesNavItem('register')}>
+                Register
+              </Link>
             </>
           )}
         </ul>

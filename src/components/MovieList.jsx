@@ -4,9 +4,11 @@ import MovieCard from './MovieCard';
 import moviesApi from '../api/movies';
 import watchlist from '../api/watchlist';
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
-function MovieList({ loggedIn }) {
+function MovieList() {
   const [movies, setMovies] = useState([]);
+  const navigate = useNavigate();
 
   const loadMovies = async () => {
     setMovies(await moviesApi.getMovies());
@@ -33,7 +35,11 @@ function MovieList({ loggedIn }) {
   };
 
   const handleEdit = (_id) => {
-    console.log('Editing movie: ' + _id);
+    navigate('/edit-movie', {
+      state: {
+        movie: movies.find((movie) => movie._id === _id),
+      },
+    });
   };
 
   return (
@@ -44,7 +50,6 @@ function MovieList({ loggedIn }) {
             <div key={movie._id} className='col-md-3 movie-card-container'>
               <MovieCard
                 {...movie}
-                loggedIn={loggedIn}
                 onAdd={handleAddtoWatchlist}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
@@ -52,6 +57,9 @@ function MovieList({ loggedIn }) {
             </div>
           ))}
         </div>
+        <button onClick={() => navigate('/add-movie')} className='add-movie'>
+          Add movie
+        </button>
         <ToastContainer />
       </div>
     </div>

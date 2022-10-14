@@ -5,7 +5,6 @@ function MovieCard({
   name,
   releaseYear,
   posterImageUrl,
-  loggedIn,
   onAdd,
   onEdit,
   onDelete,
@@ -22,7 +21,7 @@ function MovieCard({
           {name} ({releaseYear})
         </div>
       </div>
-      {loggedIn && (
+      {localStorage.getItem('x-auth-token') && (
         <div className='movie-card--actions'>
           <div className='movie-card--action' onClick={() => onAdd(_id)}>
             Add

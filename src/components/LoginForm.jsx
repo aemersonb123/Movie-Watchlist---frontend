@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import auth from '../api/auth';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     auth
       .login(username, password)
       .then((response) => {
-        setErrorMessage('');
         localStorage.setItem('x-auth-token', response.headers['x-auth-token']);
+        navigate('/');
       })
       .catch((error) => setErrorMessage(error.response.data));
   };

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import auth from '../api/auth';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
   const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate();
 
   const handleRegister = () => {
     if (password !== confirmPassword)
@@ -15,8 +17,8 @@ function RegisterForm() {
     auth
       .register(username, password)
       .then((response) => {
-        setErrorMessage('');
         localStorage.setItem('x-auth-token', response.headers['x-auth-token']);
+        navigate('/');
       })
       .catch((error) => setErrorMessage(error.response.data));
   };
