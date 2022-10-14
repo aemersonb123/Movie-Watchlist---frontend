@@ -1,12 +1,18 @@
 import React from 'react';
 import { useState } from 'react';
+import movies from '../api/movies';
 import MovieForm from './MovieForm';
 
 function MovieAddForm() {
   const [error, setError] = useState('');
 
   const handleSubmit = (values) => {
-    console.log(values);
+    movies
+      .addMovie(values)
+      .then((response) => {
+        setError('');
+      })
+      .catch((error) => setError(error.response.data));
   };
 
   return (

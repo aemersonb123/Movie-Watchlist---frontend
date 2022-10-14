@@ -10,12 +10,12 @@ import Watchlist from './components/Watchlist';
 function App() {
   return (
     <div className='App'>
-      <Navbar loggedIn={false} />
-      <RegisterForm />
+      <Navbar loggedIn={localStorage.getItem('x-auth-token')} />
+      {/* <RegisterForm /> */}
       {/* <LoginForm /> */}
-      {/* <MovieEditForm /> */}
+      <MovieEditForm />
       {/* <MovieAddForm /> */}
-      {/* <Watchlist userToken='eyidnfikjsni.fsdfjksje.gjksei' /> */}
+      {/* <Watchlist /> */}
       {/* <MovieList loggedIn={true} /> */}
     </div>
   );

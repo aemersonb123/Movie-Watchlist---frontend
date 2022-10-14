@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import auth from '../api/auth';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -8,7 +9,16 @@ function RegisterForm() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleRegister = () => {
-    console.log({ username, password, confirmPassword });
+    if (password !== confirmPassword)
+      return setErrorMessage('Passwords must match.');
+
+    auth
+      .register(username, password)
+      .then((response) => {
+        setErrorMessage('');
+        localStorage.setItem('x-auth-token', response.headers['x-auth-token']);
+      })
+      .catch((error) => setErrorMessage(error.response.data));
   };
 
   return (

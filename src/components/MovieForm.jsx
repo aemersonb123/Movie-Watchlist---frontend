@@ -10,11 +10,11 @@ function MovieForm({
   const { name, releaseYear, posterImageUrl: initialPosterImageUrl } = movie;
 
   const [posterImageUrl, setPosterImageUrl] = useState(
-    movie ? initialPosterImageUrl : ''
+    initialPosterImageUrl ? initialPosterImageUrl : ''
   );
-  const [movieName, setMovieName] = useState(movie ? name : '');
+  const [movieName, setMovieName] = useState(name ? name : '');
   const [movieReleaseYear, setMovieReleaseYear] = useState(
-    movie ? releaseYear : ''
+    name ? releaseYear : ''
   );
 
   return (
@@ -51,7 +51,11 @@ function MovieForm({
           type='submit'
           className='btn btn-primary btn-lg'
           onClick={() =>
-            onSubmit({ movieName, movieReleaseYear, posterImageUrl })
+            onSubmit({
+              name: movieName,
+              releaseYear: movieReleaseYear,
+              posterImageUrl,
+            })
           }
         >
           {submitLabel ? submitLabel : 'Submit'}

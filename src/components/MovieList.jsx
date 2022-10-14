@@ -1,66 +1,35 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import MovieCard from './MovieCard';
-
-const movies = [
-  {
-    _id: 1,
-    name: 'John Wick',
-    releaseYear: 2014,
-    posterImageUrl:
-      'https://www.themoviedb.org/t/p/original/d7YxLE6ohg7TnDLYr6DEvyAxnC8.jpg',
-  },
-  {
-    _id: 2,
-    name: 'Spider-Man: No Way Home',
-    releaseYear: 2021,
-    posterImageUrl:
-      'https://www.themoviedb.org/t/p/original/uJYYizSuA9Y3DCs0qS4qWvHfZg4.jpg',
-  },
-  {
-    _id: 3,
-    name: 'John Wick',
-    releaseYear: 2014,
-    posterImageUrl:
-      'https://www.themoviedb.org/t/p/original/d7YxLE6ohg7TnDLYr6DEvyAxnC8.jpg',
-  },
-  {
-    _id: 5,
-    name: 'Spider-Man: No Way Home',
-    releaseYear: 2021,
-    posterImageUrl:
-      'https://www.themoviedb.org/t/p/original/uJYYizSuA9Y3DCs0qS4qWvHfZg4.jpg',
-  },
-  ,
-  {
-    _id: 6,
-    name: 'John Wick',
-    releaseYear: 2014,
-    posterImageUrl:
-      'https://www.themoviedb.org/t/p/original/d7YxLE6ohg7TnDLYr6DEvyAxnC8.jpg',
-  },
-  {
-    _id: 7,
-    name: 'Spider-Man: No Way Home',
-    releaseYear: 2021,
-    posterImageUrl:
-      'https://www.themoviedb.org/t/p/original/uJYYizSuA9Y3DCs0qS4qWvHfZg4.jpg',
-  },
-  {
-    _id: 8,
-    name: 'Spider-Man: No Way Home',
-    releaseYear: 2021,
-    posterImageUrl:
-      'https://www.themoviedb.org/t/p/original/uJYYizSuA9Y3DCs0qS4qWvHfZg4.jpg',
-  },
-];
+import moviesApi from '../api/movies';
+import watchlist from '../api/watchlist';
+import { toast, ToastContainer } from 'react-toastify';
 
 function MovieList({ loggedIn }) {
+  const [movies, setMovies] = useState([]);
+
+  const loadMovies = async () => {
+    setMovies(await moviesApi.getMovies());
+  };
+
+  useEffect(() => {
+    loadMovies();
+  }, []);
+
   const handleAddtoWatchlist = (_id) => {
-    console.log('Added movie: ' + _id + ' to watchlist');
+    watchlist
+      .addToWatchlist(_id)
+      .then(() => {
+        console.log('Success');
+        toast.success('Added to watchlist!');
+      })
+      .catch((error) => toast.error(error.response.data));
   };
 
   const handleDelete = (_id) => {
-    console.log('Deleted movie: ' + _id);
+    moviesApi
+      .deleteMovie(_id)
+      .then(() => setMovies(movies.filter((movie) => movie._id !== _id)));
   };
 
   const handleEdit = (_id) => {
@@ -83,6 +52,7 @@ function MovieList({ loggedIn }) {
             </div>
           ))}
         </div>
+        <ToastContainer />
       </div>
     </div>
   );

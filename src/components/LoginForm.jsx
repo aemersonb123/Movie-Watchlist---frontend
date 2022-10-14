@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import auth from '../api/auth';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -6,7 +7,13 @@ function LoginForm() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleLogin = () => {
-    console.log({ username, password });
+    auth
+      .login(username, password)
+      .then((response) => {
+        setErrorMessage('');
+        localStorage.setItem('x-auth-token', response.headers['x-auth-token']);
+      })
+      .catch((error) => setErrorMessage(error.response.data));
   };
 
   return (

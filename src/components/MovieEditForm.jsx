@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
+import movies from '../api/movies';
 import MovieForm from './MovieForm';
 
 function MovieEditForm() {
   const [error, setError] = useState('');
   const [movie, setMovie] = useState({
-    _id: 1,
+    _id: '63490adce3f03a2f911ec843',
     name: 'John Wick',
     releaseYear: 2014,
     posterImageUrl:
@@ -13,7 +14,10 @@ function MovieEditForm() {
   });
 
   const handleSubmit = (values) => {
-    console.log(values);
+    movies
+      .editMovie(movie._id, values)
+      .then(() => setError(''))
+      .catch((error) => setError(error.response.data));
   };
 
   return (
